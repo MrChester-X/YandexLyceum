@@ -1,3 +1,7 @@
+# Сделано вместе с Валерией Заугловой
+# GitHub: https://github.com/MrChester-X/YandexLyceum
+
+# Библиотека Азбуки Морзы
 MorseCode = {
     "A": ".-",
     "B": "-...",
@@ -38,6 +42,7 @@ MorseCode = {
     " ": " "
 }
 
+# Текста, используемые программой
 text_welcome = \
     """\
 Привет! Я мини-программа, работающая с азбукой Морзы\n
@@ -58,11 +63,13 @@ text_wait_continue = \
 Нажми Enter для продолжения..."""
 
 
+# Делаем ожидание ввода Enter одной функцией
 def print_wait_continue():
     print(text_wait_continue)
     input()
 
 
+# Кодирование текста в Азбуку Морзы
 def encode_to_morse(text):
     array = []
     for i in range(len(text)):
@@ -71,6 +78,7 @@ def encode_to_morse(text):
     return " ".join(array)
 
 
+# Делаем функцию, которая дает пользователю бесконечно пользоваться программой
 def main():
     while True:
         print(text_welcome)
@@ -86,4 +94,5 @@ def main():
             print_wait_continue()
 
 
+# Запускаем нашу программу =)
 main()
