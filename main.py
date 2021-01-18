@@ -2,7 +2,7 @@
 # GitHub: https://github.com/MrChester-X/YandexLyceum
 
 # Библиотека Азбуки Морзы
-MorseCode = {
+MorseCode_En = {
     "A": ".-",
     "B": "-...",
     "C": "-.-.",
@@ -29,6 +29,43 @@ MorseCode = {
     "X": "-..-",
     "Y": "-.--",
     "Z": "--..",
+}
+
+MorseCode_Ru = {
+    "А": ".-",
+    "Б": "-...",
+    "В": ".--",
+    "Г": "--.",
+    "Д": "-..",
+    "Е": ".",
+    "Ё": ".",
+    "Ж": "...-",
+    "З": "--..",
+    "И": "..",
+    "Й": ".---",
+    "К": "-.-",
+    "Л": ".-..",
+    "М": "--",
+    "Н": "-.",
+    "О": "---",
+    "П": ".--.",
+    "Р": ".-.",
+    "С": "...",
+    "Т": "-",
+    "У": "..-",
+    "Ф": "..-.",
+    "Х": "····",
+    "Ц": "-.-.",
+    "Ч": "−−−·",
+    "Ъ": "−−·−−",
+    "Ы": "-.--",
+    "Ь": "-..-",
+    "Э": "··−··",
+    "Ю": "··−−",
+    "Я": "·−·−",
+}
+
+MorseCode_Other = {
     "1": ".----",
     "2": "..---",
     "3": "...--",
@@ -39,7 +76,13 @@ MorseCode = {
     "8": "---..",
     "9": "----.",
     "0": "-----",
-    " ": " "
+    ".": "......",
+    ",": ".-.-.-",
+    ":": "---...",
+    ";": "-.-.-.",
+    "(": "-.--.-",
+    ")": "-.--.-",
+    "-": "-....-"
 }
 
 # Текста, используемые программой
@@ -63,6 +106,21 @@ text_wait_continue = \
 Нажми Enter для продолжения..."""
 
 
+def get_dict_by_lang(lang):
+    temp_codes = {}
+    if lang == "all":
+        temp_codes.update(MorseCode_Ru)
+        temp_codes.update(MorseCode_En)
+        temp_codes.update(MorseCode_Other)
+    elif lang == "ru":
+        temp_codes.update(MorseCode_Ru)
+        temp_codes.update(MorseCode_Other)
+    elif lang == "en":
+        temp_codes.update(MorseCode_En)
+        temp_codes.update(MorseCode_Other)
+    return temp_codes
+
+
 # Делаем ожидание ввода Enter одной функцией
 def print_wait_continue():
     print(text_wait_continue)
@@ -72,9 +130,11 @@ def print_wait_continue():
 # Кодирование текста в Азбуку Морзы
 def encode_to_morse(text):
     array = []
+    # Объединяем все словари в один
+    temp_codes = get_dict_by_lang("all")
     for i in range(len(text)):
-        if text[i].upper() in MorseCode.keys():
-            array.append(MorseCode[text[i].upper()])
+        if text[i].upper() in temp_codes.keys():
+            array.append(temp_codes[text[i].upper()])
     return " ".join(array)
 
 
